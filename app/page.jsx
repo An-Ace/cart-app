@@ -40,17 +40,13 @@ export default function Home() {
         </div>
       <Cart data={cart} onChange={(id, c) => addItem(id,c)} onClear={() => setCart([])}/>
     </div>
+    {/* <Print data={cart} onProcess={() => setCart([])}/> */}
   </div>
   )
 }
 
 function searchFilter (query) {
   return initData.filter(item => item.name.fuzzy(query))
-}
-
-
-function test () {
-  return []
 }
 
 const initData = [

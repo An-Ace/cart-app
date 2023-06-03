@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
+import Print from "./print"
+
 const cashList = [
   2000, 5000, 10000, 20000, 50000, 100000
 ]
@@ -9,6 +11,13 @@ export default function Cart ({ data, onChange, onClear }) {
     return countData(data)
   }, [data])
   return <div className="flex w-100 sm:w-5/12 flex-col h-full pr-4 pl-2 py-4">
+    <Print data={data} 
+      cash={cash}
+      totalPrice={totalPrice}
+      onClear={() => {
+        onClear()
+        setCash(0)
+      }}/>
     <div className="bg-white rounded-3xl flex flex-col h-full shadow">
       {
         data.length ? <div
@@ -74,6 +83,8 @@ export default function Cart ({ data, onChange, onClear }) {
                 alt=""
                 className="rounded-lg h-10 w-10 bg-white shadow mr-2"
                 src={item.img}
+                width={40}
+                height={40}
               />
               <div className="flex-grow">
                 <h5 className="text-sm" x-text="item.name">
@@ -190,6 +201,9 @@ export default function Cart ({ data, onChange, onClear }) {
         <button
           className={`text-white rounded-2xl text-lg w-full py-3 focus:outline-none ${ cash - totalPrice < 0 ? "bg-gray-400/75" : "bg-blue-800"}`}
           disabled={cash - totalPrice < 0}
+          onClick={() => {
+            document.getElementById("print-cart").style.display = "inherit"
+          }}
         >
           SUBMIT
         </button>

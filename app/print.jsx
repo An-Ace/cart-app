@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 var moment = require('moment');
 export default function Print ({ data, onClear, cash, totalPrice }) {
   return <div
@@ -18,10 +20,12 @@ export default function Print ({ data, onClear, cash, totalPrice }) {
         style={{ maxHeight: "70vh" }}
       >
         <div className="text-center">
-          <img
-            src="img/receipt-logo.png"
+          <Image
+            src="/favicon.png"
             alt="Tailwind POS"
             className="mb-3 w-8 h-8 inline-block"
+            width={32}
+            height={32}
           />
           <h2 className="text-xl font-semibold">Cart App</h2>
           <p>CABANG MOJOSARI MOJOKERTO</p>
@@ -45,7 +49,7 @@ export default function Print ({ data, onClear, cash, totalPrice }) {
             </thead>
             <tbody>
               {
-                data.map(item => <Item item={item} />)
+                data.map(item => <Item item={item} key={item.id}/>)
               }
             </tbody>
           </table>
